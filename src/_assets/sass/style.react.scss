@@ -9,4 +9,7 @@
 // 2: Bootstrap framework includes
 @import "~bootstrap/scss/bootstrap";
 // 3: Components
-@import "./components/button";
+@import "./components/utilities",
+"./components/button";
+// 5: Layout
+@import "./layout/init";

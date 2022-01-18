@@ -32,7 +32,8 @@ $grays: ( "100": $gray-100, "200": $gray-200, "300": $gray-300, "400": $gray-400
 // scss-docs-end gray-colors-map
 // fusv-enable
 // scss-docs-start color-variables
-$blue: #3699FF !default;
+$blue: #268cf0 !default;
+$blue-900: #4754aa !default;
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
 $pink: #d63384 !default;
@@ -302,9 +303,11 @@ $border-radius: .15rem !default;
 $border-radius-sm: .12rem !default;
 $border-radius-lg: .25rem !default;
 $border-radius-pill: 50rem !default;
+$border-radius-xl: 1.25rem !default; // Custom variable
 // scss-docs-end border-radius-variables
 // scss-docs-start box-shadow-variables
 $box-shadow: 0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow-xs: 0 0.25rem 0.5rem 0 rgba($black, 0.05);
 $box-shadow-sm: 0 .125rem .25rem rgba($black, .075) !default;
 $box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
 $box-shadow-inset: inset 0 1px 2px rgba($black, .075) !default;
@@ -360,12 +363,23 @@ $font-size-root: null !default;
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
 $font-size-sm: $font-size-base * .875 !default;
 $font-size-lg: $font-size-base * 1.25 !default;
+$font-size-md: $font-size-base * 1.1 !default;
+$font-size-xs: $font-size-base * .8 !default; // 10.4px
+$h1-font-size: $font-size-base * 2 !default; // 26px
+$h2-font-size: $font-size-base * 1.75 !default; // 22.75px
+$h3-font-size: $font-size-base * 1.5 !default; // 19.5px
+$h4-font-size: $font-size-base * 1.35 !default; // 17.55px
+$h5-font-size: $font-size-base * 1.25 !default; // 16.25px
+$h6-font-size: $font-size-base * 1.175 !default; // 15.275px
 $font-weight-lighter: lighter !default;
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
 $font-weight-bold: 700 !default;
 $font-weight-bolder: bolder !default;
 $font-weight-base: $font-weight-normal !default;
+$font-weight-boldest: 700 !default;
+$font-weight-800: 800 !default;
+$font-weight-900: 900 !default;
 $line-height-base: 1.5 !default;
 $line-height-sm: 1.25 !default;
 $line-height-lg: 2 !default;
