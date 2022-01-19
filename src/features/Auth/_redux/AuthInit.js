@@ -14,8 +14,8 @@ function AuthInit(props) {
 
   //
   const resultBack = () => {
-    window.location.href = "/on-tap.aspx";
-    localStorage.removeItem("_info_review");
+    // window.location.href = "/on-tap.aspx";
+    // localStorage.removeItem("_info_review");
   };
 
   // We should request user by authToken before rendering the application

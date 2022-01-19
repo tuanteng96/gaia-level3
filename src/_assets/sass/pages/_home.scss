@@ -15,6 +15,51 @@
         &__title {
             margin-bottom: 35px;
         }
+        &__content {
+            padding: 0 8%;
+        }
+        &__user {
+            padding: 0 25px;
+            .info {
+                position: relative;
+                button {
+                    width: 47px;
+                    height: 47px;
+                    border: 2px solid #3fb0ff;
+                    box-shadow: 0px 0px 8px 1px #3fb0ff;
+                    img {
+                        width: 18px;
+                    }
+                }
+                &-content {
+                    position: absolute;
+                    right: 65px;
+                    bottom: 0;
+                    width: 325px;
+                    border-radius: 20px;
+                    background: $white;
+                    padding: 12px 10px;
+                    box-shadow: 0px 0px 9px 1px rgb(61 174 255 / 52%);
+                    z-index: 10;
+                    a {
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                        img {
+                            width: 20px;
+                        }
+                    }
+                    .text-1 {
+                        font-size: 16px;
+                        line-height: 20px;
+                    }
+                    .text-2 {
+                        font-size: 18px;
+                        margin-bottom: 3px;
+                    }
+                }
+            }
+        }
         .home-box {
             a {
                 position: relative;
@@ -43,7 +88,7 @@
                 position: absolute;
                 bottom: -50px;
                 background: linear-gradient( 0deg, #375cb3, #283b83 80%) no-repeat;
-                padding: 15px;
+                padding: 16px 15px 15px;
                 border: 2px solid $white;
                 border-radius: 50px;
                 width: 75%;

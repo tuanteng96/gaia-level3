@@ -11,5 +11,11 @@
 // 3: Components
 @import "./components/utilities",
 "./components/button";
+// 4: Plugins
+@import "./vendors/plugins/perfect-scrollbar";
 // 5: Layout
-@import "./layout/init";
+@import "./layout/init",
+"./layout/aside",
+"./layout/content",
+"./layout/brand",
+"./layout/social";

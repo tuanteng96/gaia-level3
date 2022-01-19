@@ -1,0 +1,31 @@
+.social {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    a {
+        display: flex;
+        align-items: center;
+        color: $primary-900;
+        text-decoration: none;
+        .icon {
+            width: 47px;
+            height: 47px;
+            background: $white;
+            border: 1px solid $primary;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i {
+                color: $primary-900;
+                font-size: 22px;
+            }
+        }
+        .text {
+            color: $primary-900;
+            font-weight: 800;
+            padding-left: 15px;
+            font-size: 15px;
+        }
+    }
+}

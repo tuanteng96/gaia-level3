@@ -1,0 +1,23 @@
+.brand {
+    height: 153px;
+    &-logo {}
+    &-slug {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-900;
+        color: $white;
+        text-shadow: 1px 2px 3px #317bb3, 1px -1px 2px #317bb3, -1px 1px 2px #317bb3, 1px 1px 2px #317bb3;
+        span {
+            line-height: 20px;
+        }
+    }
+    &-info {
+        .info-icon {
+            width: 47px;
+            height: 47px;
+            border: 1px solid $primary;
+            img {
+                width: 18px;
+            }
+        }
+    }
+}
