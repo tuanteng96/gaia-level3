@@ -1,0 +1,46 @@
+.braum {
+    margin-bottom: 30px;
+    ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        li {
+            margin-right: 28px;
+            position: relative;
+            a,
+            span {
+                background: $yellow;
+                color: $primary-900;
+                font-weight: 800;
+                text-decoration: none;
+                padding: 8px 12px;
+                display: block;
+                border-radius: 8px;
+                box-shadow: 1px 1px 7px rgb(46 57 102 / 42%);
+                font-size: 15px;
+                border: 1px solid $yellow;
+            }
+            span {
+                background: $white;
+                border: 1px solid $primary-900;
+            }
+            &::before {
+                content: "\f0da";
+                font-family: "Font Awesome 5 Pro";
+                font-weight: 900;
+                font-size: 28px;
+                color: $primary-900;
+                position: absolute;
+                left: -17px;
+                top: 2px;
+            }
+            &:first-child {
+                margin-left: 0;
+                &::before {
+                    display: none;
+                }
+            }
+        }
+    }
+}

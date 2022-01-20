@@ -19,10 +19,7 @@
      background: get($aside-config, base, bg-color);
      width: 100%;
      height: 100vh;
-     transition: get($aside-config, base, transition);
-     &.aside-minimize {
-         max-width: get($aside-config, base, minimized-width);
-     }
+     //  transition: get($aside-config, base, transition);
      .menu-nav {
          list-style: none;
          margin: 0;
@@ -64,7 +61,6 @@
                      position: absolute;
                      top: 0;
                      left: -15px;
-                     transition: all .2s ease-in-out;
                      border-radius: 100%;
                      border: 1px solid $primary;
                      display: flex;
@@ -135,6 +131,33 @@
                              }
                          }
                      }
+                 }
+             }
+         }
+     }
+ }
+ 
+ .aside-minimize {
+     .aside {
+         max-width: get($aside-config, base, minimized-width);
+         .menu-nav {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             >.menu-item {
+                 padding-left: 0;
+                 margin-bottom: 25px;
+                 >.menu-link {
+                     .menu-icon {
+                         position: relative;
+                         left: 0;
+                     }
+                     .menu-text {
+                         display: none;
+                     }
+                 }
+                 .menu-submenu {
+                     display: none;
                  }
              }
          }

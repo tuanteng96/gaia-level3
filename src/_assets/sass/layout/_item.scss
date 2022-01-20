@@ -1,0 +1,84 @@
+.item-field {
+    display: block;
+    margin-bottom: 25px;
+    text-decoration: none;
+    .images {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 1px 1px 7px rgb(46 57 102);
+    }
+    h3 {
+        margin-top: 12px;
+        margin-bottom: 0;
+        font-weight: 800;
+        color: $primary-900;
+        font-size: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        height: 48px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        line-height: 25px;
+    }
+    &-btns {
+        cursor: pointer;
+        position: relative;
+        .images {
+            position: relative;
+            .btn-view {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 15px;
+                display: flex;
+                justify-content: center;
+                background: rgb(54 153 255 / 60%);
+                transform: translateY(100%);
+                visibility: hidden;
+                transition: transform .2s ease-in-out;
+                .btn-viewed {
+                    background: $white;
+                    border: 1px solid $primary;
+                    color: $primary-900;
+                    font-weight: 800;
+                    text-align: center;
+                    padding: 8px 15px;
+                    border-radius: 25px;
+                    margin: 0 6px;
+                    font-size: 16px;
+                    transition: all .2s ease-in-out;
+                    &:hover {
+                        background: $primary-900;
+                        border: 1px solid $white;
+                        color: $white;
+                    }
+                }
+            }
+        }
+        &:hover {
+            .images {
+                .btn-view {
+                    transform: translateY(0);
+                    visibility: visible;
+                }
+            }
+        }
+        .finished {
+            width: 47px;
+            position: absolute;
+            top: -20px;
+            right: -15px;
+            z-index: 2;
+            img {
+                filter: grayscale(100%);
+            }
+            &.active {
+                img {
+                    filter: grayscale(0); // Khi active Finished
+                }
+            }
+        }
+    }
+}

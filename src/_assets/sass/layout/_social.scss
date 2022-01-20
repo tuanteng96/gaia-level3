@@ -2,6 +2,9 @@
     height: 65px;
     display: flex;
     align-items: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    position: relative;
     a {
         display: flex;
         align-items: center;
@@ -26,6 +29,51 @@
             font-weight: 800;
             padding-left: 15px;
             font-size: 15px;
+        }
+    }
+    button {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 47px;
+        height: 47px;
+        background: transparent;
+        border: 0;
+        outline: none;
+        i {
+            color: $primary-900;
+            font-size: 40px;
+        }
+    }
+}
+
+.aside-minimize {
+    .social {
+        a {
+            display: none;
+        }
+        button {
+            right: auto;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 100%;
+            background: $white;
+            border: 1px solid $primary;
+            &:hover {
+                background: $primary-900;
+                border: 1px solid $white;
+                i {
+                    color: $white;
+                }
+            }
+            i {
+                position: absolute;
+                font-size: 35px;
+                top: 4px;
+                left: 18px;
+                transform: rotate( 180deg);
+            }
         }
     }
 }

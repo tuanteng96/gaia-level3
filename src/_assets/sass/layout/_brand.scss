@@ -1,7 +1,12 @@
 .brand {
     height: 153px;
+    &-top {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
     &-logo {}
     &-slug {
+        display: flex;
         font-size: $font-size-lg;
         font-weight: $font-weight-900;
         color: $white;
@@ -11,13 +16,55 @@
         }
     }
     &-info {
+        .brand-info-to {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        a {
+            text-decoration: none;
+        }
         .info-icon {
             width: 47px;
             height: 47px;
             border: 1px solid $primary;
-            img {
-                width: 18px;
+            line-height: 51px;
+            text-align: center;
+            i {
+                color: $primary-900;
+                font-size: 22px;
             }
+        }
+    }
+}
+
+.aside-minimize {
+    .brand-top {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .brand-slug {
+        display: none;
+    }
+    .brand-info-to {
+        padding-left: 0;
+        padding-right: 0;
+        justify-content: center !important;
+        background: transparent !important;
+        .info-icon {
+            background: $white;
+            &:hover {
+                background: $primary-900;
+                border: 1px solid $white;
+                i {
+                    color: $white;
+                }
+            }
+        }
+    }
+    .brand-info {
+        .info-text,
+        .icon-img {
+            display: none !important;
         }
     }
 }

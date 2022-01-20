@@ -22,10 +22,10 @@ var EZSLayoutAsideMenu = function() {
                 rememberPosition: true, // remember position on page reload
                 height: function() { // calculate available scrollable area height
                     var height = parseInt(EZSUtil.getViewPort().height);
-                    if (EZSUtil.isBreakpointUp('lg')) {
-                        height = height - EZSLayoutBrand.getHeight() - EZSLayoutSocial.getHeight();
-                    }
-
+                    // if (EZSUtil.isBreakpointUp('lg')) {
+                    //     height = height - EZSLayoutBrand.getHeight() - EZSLayoutSocial.getHeight();
+                    // }
+                    height = height - EZSLayoutBrand.getHeight() - EZSLayoutSocial.getHeight();
                     height = height - (parseInt(EZSUtil.css(_element, 'marginBottom')) + parseInt(EZSUtil.css(_element, 'marginTop')));
 
                     return height;

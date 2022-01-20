@@ -1006,7 +1006,6 @@ export var EZSUtil = function() {
                     value = el.offsetWidth;
                 } else if (prop == 'height') {
                     value = el.offsetHeight;
-                    console.log(el.offsetHeight)
                 }
 
                 el.style.cssText = css;

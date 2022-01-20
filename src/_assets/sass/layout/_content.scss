@@ -3,4 +3,54 @@
 //
 .content {
     flex-grow: 1;
+    position: relative;
+    padding: 40px 15px 30px;
+    .image-plance {
+        position: absolute;
+        right: 25px;
+        top: 10px;
+        max-width: 500px;
+    }
+    .container-resize {
+        max-width: 100%;
+    }
+    .content-scroll {
+        height: calc(100% - 71px);
+        overflow: auto;
+        padding-right: 10px;
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: #adddff;
+        }
+        &::-webkit-scrollbar {
+            width: 7px;
+            background-color: #F5F5F5;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #5bbcff;
+        }
+    }
+}
+
+.aside-minimize {
+    .content {
+        .container-resize {
+            max-width: 1320px;
+        }
+    }
+    .content-scroll {
+        padding-right: 0;
+    }
+}
+
+.container-15 {
+    padding-left: -18px;
+    padding-right: -18px;
+    >.row {
+        .col-15 {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+    }
 }
