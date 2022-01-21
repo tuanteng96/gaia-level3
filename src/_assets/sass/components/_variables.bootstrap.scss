@@ -1048,6 +1048,15 @@ $modal-inner-padding: $spacer !default;
 $modal-footer-margin-between: .5rem !default;
 $modal-dialog-margin: .5rem !default;
 $modal-dialog-margin-y-sm-up: 1.75rem !default;
+$modal-title-color: $dark !default; // Custom variable
+$modal-title-font-weight: 500 !default; // Custom variable
+$modal-title-font-size: 1.3rem !default; // Custom variable
+$modal-title-small-color: $text-muted !default; // Custom variable
+$modal-title-small-font-weight: 400 !default; // Custom variable
+$modal-title-small-font-size: 0.9rem !default; // Custom variable
+$modal-title-close-font-size: 1rem !default; // Custom variable
+$modal-title-close-color: $text-muted !default; // Custom variable
+$modal-title-close-hover-color: $primary !default; // Custom variable
 $modal-title-line-height: $line-height-base !default;
 $modal-content-color: null !default;
 $modal-content-bg: $white !default;

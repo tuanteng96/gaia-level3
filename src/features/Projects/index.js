@@ -28,14 +28,14 @@ function Projects(props) {
                     <div className="finished">
                       <img
                         className="w-100"
-                        src={toAbsoluteUrl("../media/home/finished.png")}
+                        src={toAbsoluteUrl("/media/home/finished.png")}
                         alt=""
                       />
                     </div>
                     <div className="images">
                       <img
                         className="w-100"
-                        src={toAbsoluteUrl("../media/home/item-1.png")}
+                        src={toAbsoluteUrl("/media/home/item-1.png")}
                         alt=""
                       />
                       <div className="btn-view">

@@ -27,8 +27,9 @@
                     height: 47px;
                     border: 2px solid #3fb0ff;
                     box-shadow: 0px 0px 8px 1px #3fb0ff;
-                    img {
-                        width: 18px;
+                    i {
+                        color: $primary-900;
+                        font-size: 22px;
                     }
                 }
                 &-content {
@@ -41,12 +42,14 @@
                     padding: 12px 10px;
                     box-shadow: 0px 0px 9px 1px rgb(61 174 255 / 52%);
                     z-index: 10;
-                    a {
+                    .logout {
                         position: absolute;
-                        right: 10px;
-                        top: 10px;
-                        img {
-                            width: 20px;
+                        right: 12px;
+                        top: 12px;
+                        cursor: pointer;
+                        i {
+                            color: $primary-900;
+                            font-size: 22px;
                         }
                     }
                     .text-1 {
@@ -91,7 +94,7 @@
                 padding: 16px 15px 15px;
                 border: 2px solid $white;
                 border-radius: 50px;
-                width: 75%;
+                width: 80%;
                 font-size: 16px;
                 font-weight: $font-weight-bolder;
                 line-height: 1.6;

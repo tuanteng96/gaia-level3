@@ -1,12 +1,36 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { toAbsoluteUrl } from "../../helpers/AssetsHelpers";
+import { toAbsoluteUrl, toAbsoluteUrlSv } from "../../helpers/AssetsHelpers";
 import { Animated } from "react-animated-css";
+import HomeCrud from "./_redux/HomeCrud";
 import "../../_assets/sass/pages/_home.scss";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../Auth/_redux/AuthSlice";
 
 function Home(props) {
   const [isOpenUser, setIsOpenUser] = useState(true);
   const wrapperRef = useRef(null);
+  const [CateList, setCateList] = useState([]);
+  const dispath = useDispatch();
+
+  const { Auth } = useSelector((state) => ({
+    Auth: state.auth.user,
+  }));
+
+  const getCateCurrent = () => {
+    HomeCrud.getCate(1)
+      .then(({ data }) => {
+        setCateList(data.filter((item) => item.ParentID === 1));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getCateCurrent();
+  }, []);
 
   return (
     <div className="page-home d-flex flex-column justify-content-between">
@@ -22,121 +46,35 @@ function Home(props) {
         </div>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-3">
-              <Animated
-                animationIn="flipInY"
-                animationOut="fadeOut"
-                isVisible={true}
-              >
-                <div className="home-box">
-                  <Link to="/" className="d-block">
-                    <div className="d-flex flex-column align-items-center">
-                      <div className="image">
-                        <img
-                          src={toAbsoluteUrl("/media/home/icon-1.png")}
-                          alt=""
-                        />
-                      </div>
-                      <div className="title d-flex flex-column align-items-center">
-                        <span className="line-height-md mb-2">
-                          Cafetech HTV cùng GAIA :
-                        </span>
-                        <span className="text-uppercase line-height-md">
-                          Hướng nghiệp tương lai
-                        </span>
-                      </div>
+            {CateList &&
+              CateList.map((item, index) => (
+                <div className="col-md-3" key={index}>
+                  <Animated
+                    animationIn="flipInY"
+                    animationOut="fadeOut"
+                    isVisible={true}
+                    animationInDelay={100 * index}
+                  >
+                    <div className="home-box">
+                      <Link
+                        to={`/${index + 1}/${item.NameFr}/${item.ID}`}
+                        className="d-block"
+                      >
+                        <div className="d-flex flex-column align-items-center">
+                          <div className="image">
+                            <img src={toAbsoluteUrlSv(item.Thumbnail)} alt="" />
+                          </div>
+                          <div className="title d-flex flex-column align-items-center">
+                            <span className="text-uppercase line-height-lg text-center">
+                              {item.Title}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
-                  </Link>
+                  </Animated>
                 </div>
-              </Animated>
-            </div>
-            <div className="col-md-3">
-              <Animated
-                animationIn="flipInY"
-                animationOut="fadeOut"
-                isVisible={true}
-                animationInDelay={200}
-              >
-                <div className="home-box">
-                  <Link to="/" className="d-block">
-                    <div className="d-flex flex-column align-items-center">
-                      <div className="image">
-                        <img
-                          src={toAbsoluteUrl("/media/home/icon-2.png")}
-                          alt=""
-                        />
-                      </div>
-                      <div className="title d-flex flex-column align-items-center">
-                        <span className="text-uppercase line-height-md mb-2">
-                          Trải nghiệm học môn học
-                        </span>
-                        <span className="text-uppercase line-height-md">
-                          ở trường đại học
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </Animated>
-            </div>
-            <div className="col-md-3">
-              <Animated
-                animationIn="flipInY"
-                animationOut="fadeOut"
-                isVisible={true}
-                animationInDelay={400}
-              >
-                <div className="home-box">
-                  <Link to="/" className="d-block">
-                    <div className="d-flex flex-column align-items-center">
-                      <div className="image">
-                        <img
-                          src={toAbsoluteUrl("/media/home/icon-4.png")}
-                          alt=""
-                        />
-                      </div>
-                      <div className="title d-flex flex-column align-items-center">
-                        <span className="text-uppercase line-height-md mb-2">
-                          Trải nghiệm học môn học
-                        </span>
-                        <span className="text-uppercase line-height-md">
-                          ở trường đại học
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </Animated>
-            </div>
-            <div className="col-md-3">
-              <Animated
-                animationIn="flipInY"
-                animationOut="fadeOut"
-                isVisible={true}
-                animationInDelay={600}
-              >
-                <div className="home-box">
-                  <Link to="/" className="d-block">
-                    <div className="d-flex flex-column align-items-center">
-                      <div className="image">
-                        <img
-                          src={toAbsoluteUrl("/media/home/icon-3.png")}
-                          alt=""
-                        />
-                      </div>
-                      <div className="title d-flex flex-column align-items-center">
-                        <span className="text-uppercase line-height-md mb-2">
-                          Bài giảng
-                        </span>
-                        <span className="text-uppercase line-height-md">
-                          Định hướng nghề nghiệp
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </Animated>
-            </div>
+              ))}
           </div>
         </div>
       </div>
@@ -147,7 +85,7 @@ function Home(props) {
             className="rounded-circle"
             onClick={() => setIsOpenUser(!isOpenUser)}
           >
-            <img src={toAbsoluteUrl("/media/icons/icon-user.png")} alt="" />
+            <i className="fas fa-user"></i>
           </button>
           {isOpenUser && (
             <Animated
@@ -156,15 +94,14 @@ function Home(props) {
               isVisible={true}
             >
               <div className="info-content text-center text-primary-900 font-weight-900">
-                <Link to="">
-                  <img
-                    src={toAbsoluteUrl("/media/icons/icon-edit.png")}
-                    alt="Chỉnh sửa"
-                  />
-                </Link>
+                <div className="logout" onClick={() => dispath(logoutUser())}>
+                  <i className="fas fa-sign-out-alt"></i>
+                </div>
                 <div className="text-1">Xin chào,</div>
-                <div className="text-2">Nguyễn Tài Tuấn</div>
-                <div className="text-1">Lớp 12 Trường THPT GAIA</div>
+                <div className="text-2">{Auth.FullName}</div>
+                <div className="text-1">
+                  {Auth.Class.Title} {Auth.School.Title}
+                </div>
               </div>
             </Animated>
           )}

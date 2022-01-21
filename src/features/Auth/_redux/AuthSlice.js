@@ -17,7 +17,8 @@ const auth = createSlice({
             };
         },
         logoutUser: (state, action) => {
-
+            localStorage.removeItem("_info_review");
+            window.location.href = process.env.REACT_APP_API_URL + "/on-tap.aspx"
         }
     }
 });
@@ -29,5 +30,5 @@ const persistConfig = {
 };
 
 const { reducer, actions } = auth;
-export const { setUser } = actions;
+export const { setUser, logoutUser } = actions;
 export default persistReducer(persistConfig, reducer);

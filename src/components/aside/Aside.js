@@ -1,12 +1,80 @@
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { toAbsoluteUrl } from "../../helpers/AssetsHelpers";
+import HomeCrud from "../../features/Home/_redux/HomeCrud";
 import Brand from "../brand/Brand";
 import Social from "../social/Social";
 
+const convertTree = (list) => {
+  var map = {},
+    node,
+    roots = [],
+    i;
+
+  for (i = 0; i < list.length; i += 1) {
+    map[list[i].ID] = i;
+    list[i].children = [];
+  }
+
+  for (i = 0; i < list.length; i += 1) {
+    node = list[i];
+    if (node.ParentID && node.ParentID !== 0) {
+      list[map[node.ParentID]].children.push(node);
+    } else {
+      roots.push(node);
+    }
+  }
+  return roots.map((item) => {
+    return {
+      ...item,
+      id: item.ID,
+      children:
+        item.children && item.children.length > 0
+          ? item.children.map((sub) => {
+              return {
+                ...sub,
+                id: sub.ID,
+              };
+            })
+          : [],
+    };
+  });
+};
+
 function Aside(props) {
+  const [CateList, setCateList] = useState([]);
+
+  const getCateCurrent = () => {
+    HomeCrud.getCate(1)
+      .then(({ data }) => {
+        const result = convertTree(data);
+        setCateList(result ? result[0].children : []);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getCateCurrent();
+  }, []);
+
+  const converNumber = (index) => {
+    switch (index) {
+      case 1:
+        return "I";
+      case 2:
+        return "II";
+      case 3:
+        return "III";
+      case 4:
+        return "IV";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div id="ezs_aside" className="aside aside-left">
       <Brand />
@@ -17,110 +85,90 @@ function Aside(props) {
         data-menu-scroll="1"
       >
         <ul className="menu-nav py-3 px-4">
-          <li className={`menu-item`} aria-haspopup="true">
-            <NavLink className="menu-link" to="/dashboard">
-              <span className="svg-icon menu-icon">
-                <i className="fab fa-youtube"></i>
-              </span>
-              <span className="menu-text">
-                <span>I.</span>
-                Cafetech HTV cùng GAIA : HƯỚNG NGHIỆP TƯƠNG LAI
-              </span>
-            </NavLink>
-          </li>
-          <li
-            className={`menu-item menu-item-submenu`}
-            aria-haspopup="true"
-            data-menu-toggle="hover"
-          >
-            <NavLink className="menu-link menu-toggle" to="/dashboard">
-              <span className="svg-icon menu-icon">
-                <i className="fas fa-graduation-cap"></i>
-              </span>
-              <span className="menu-text">
-                <span>II.</span>
-                Trải nghiệm học môn học ở trường Đại học
-              </span>
-            </NavLink>
-            <div className="menu-submenu ">
-              <i className="menu-arrow" />
-              <ul className="menu-subnav">
-                {/*begin::2 Level*/}
-                <li className={`menu-item`} aria-haspopup="true">
-                  <NavLink className="menu-link" to="/">
-                    <span className="menu-text d-flex">
-                      <span className="pe-2">1.</span>
-                      Ngành máy tính & Công Nghệ thông tin
-                    </span>
-                  </NavLink>
-                </li>
-                {/*end::2 Level*/}
+          {CateList &&
+            CateList.map((item, index) => (
+              <li
+                className={`menu-item ${item.children.length > 0 &&
+                  "menu-item-submenu"}`}
+                aria-haspopup="true"
+                data-menu-toggle={item.children.length > 0 && "hover"}
+                key={index}
+              >
+                <NavLink
+                  className={`menu-link ${item.children.length > 0 &&
+                    "menu-toggle"}`}
+                  to="/"
+                >
+                  <span className="svg-icon menu-icon">
+                    <i className={item.KeySEO}></i>
+                  </span>
+                  <span className="menu-text">
+                    <span>{converNumber(index + 1)}.</span>
+                    {item.Title}
+                  </span>
+                </NavLink>
+                {item.children.length > 0 && (
+                  <div className="menu-submenu ">
+                    <i className="menu-arrow" />
+                    <ul className="menu-subnav">
+                      {/*begin::2 Level*/}
+                      <li className={`menu-item`} aria-haspopup="true">
+                        <NavLink className="menu-link" to="/">
+                          <span className="menu-text d-flex">
+                            <span className="pe-2">1.</span>
+                            Ngành máy tính & Công Nghệ thông tin
+                          </span>
+                        </NavLink>
+                      </li>
+                      {/*end::2 Level*/}
 
-                {/*begin::2 Level*/}
-                <li className={`menu-item`} aria-haspopup="true">
-                  <NavLink className="menu-link" to="/">
-                    <span className="menu-text d-flex">
-                      <span className="pe-2">2.</span> Ngành Cơ khí & Tự động
-                    </span>
-                  </NavLink>
-                </li>
-                {/*end::2 Level*/}
+                      {/*begin::2 Level*/}
+                      <li className={`menu-item`} aria-haspopup="true">
+                        <NavLink className="menu-link" to="/">
+                          <span className="menu-text d-flex">
+                            <span className="pe-2">2.</span> Ngành Cơ khí & Tự
+                            động
+                          </span>
+                        </NavLink>
+                      </li>
+                      {/*end::2 Level*/}
 
-                {/*begin::2 Level*/}
-                <li className={`menu-item`} aria-haspopup="true">
-                  <NavLink className="menu-link" to="/">
-                    <span className="menu-text d-flex">
-                      <span className="pe-2">3.</span> Ngành Xây dựng
-                    </span>
-                  </NavLink>
-                </li>
-                {/*end::2 Level*/}
+                      {/*begin::2 Level*/}
+                      <li className={`menu-item`} aria-haspopup="true">
+                        <NavLink className="menu-link" to="/">
+                          <span className="menu-text d-flex">
+                            <span className="pe-2">3.</span> Ngành Xây dựng
+                          </span>
+                        </NavLink>
+                      </li>
+                      {/*end::2 Level*/}
 
-                {/*begin::2 Level*/}
-                <li className={`menu-item`} aria-haspopup="true">
-                  <NavLink className="menu-link" to="/">
-                    <span className="menu-text d-flex">
-                      <span className="pe-2">4.</span> Ngành Kiến trúc và Mỹ
-                      thuật
-                    </span>
-                  </NavLink>
-                </li>
-                {/*end::2 Level*/}
+                      {/*begin::2 Level*/}
+                      <li className={`menu-item`} aria-haspopup="true">
+                        <NavLink className="menu-link" to="/">
+                          <span className="menu-text d-flex">
+                            <span className="pe-2">4.</span> Ngành Kiến trúc và
+                            Mỹ thuật
+                          </span>
+                        </NavLink>
+                      </li>
+                      {/*end::2 Level*/}
 
-                {/*begin::2 Level*/}
-                <li className={`menu-item`} aria-haspopup="true">
-                  <NavLink className="menu-link" to="/">
-                    <span className="menu-text d-flex">
-                      <span className="pe-2">5.</span> Ngành Công nghệ Hóa Sinh
-                    </span>
-                  </NavLink>
-                </li>
-                {/*end::2 Level*/}
-              </ul>
-            </div>
-          </li>
-          <li className={`menu-item`} aria-haspopup="true">
-            <NavLink className="menu-link" to="/dashboard">
-              <span className="svg-icon menu-icon">
-                <i className="fas fa-school"></i>
-              </span>
-              <span className="menu-text">
-                <span>III.</span>
-                Tìm hiểu thông tin về các trường Đại học
-              </span>
-            </NavLink>
-          </li>
-          <li className={`menu-item`} aria-haspopup="true">
-            <NavLink className="menu-link" to="/dashboard">
-              <span className="svg-icon menu-icon">
-                <i className="fas fa-book-open"></i>
-              </span>
-              <span className="menu-text">
-                <span>IV.</span>
-                Bài giản Định hướng nghề nghiệp
-              </span>
-            </NavLink>
-          </li>
+                      {/*begin::2 Level*/}
+                      <li className={`menu-item`} aria-haspopup="true">
+                        <NavLink className="menu-link" to="/">
+                          <span className="menu-text d-flex">
+                            <span className="pe-2">5.</span> Ngành Công nghệ Hóa
+                            Sinh
+                          </span>
+                        </NavLink>
+                      </li>
+                      {/*end::2 Level*/}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            ))}
         </ul>
       </div>
       <Social />

@@ -19,6 +19,14 @@
         .brand-info-to {
             padding-left: 1.5rem;
             padding-right: 1.5rem;
+            .icon-img {
+                margin-top: 4px;
+                i {
+                    color: $primary-900;
+                    font-size: 22px;
+                    cursor: pointer;
+                }
+            }
         }
         a {
             text-decoration: none;

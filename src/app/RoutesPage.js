@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../features/Home";
 import Projects from "../features/Projects";
+import ProjectVideos from "../features/ProjectVideos";
 import Layout from "../layout/Layout";
 
 export default function RoutesPage() {
@@ -9,7 +10,15 @@ export default function RoutesPage() {
     <Routes>
       <Route index element={<Home />} />
       <Route
-        path="/a"
+        path="/1/:slug/:Id"
+        element={
+          <Layout>
+            <ProjectVideos />
+          </Layout>
+        }
+      />
+      <Route
+        path="/2/:slug/:Id"
         element={
           <Layout>
             <Projects />
