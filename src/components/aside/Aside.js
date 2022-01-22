@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { checkIsActive } from "../../helpers/RouterHelpers";
 import HomeCrud from "../../features/Home/_redux/HomeCrud";
 import Brand from "../brand/Brand";
 import Social from "../social/Social";
@@ -44,6 +45,7 @@ const convertTree = (list) => {
 
 function Aside(props) {
   const [CateList, setCateList] = useState([]);
+  const location = useLocation();
 
   const getCateCurrent = () => {
     HomeCrud.getCate(1)
@@ -75,6 +77,13 @@ function Aside(props) {
     }
   };
 
+  const getMenuItemActive = (url, hasSubmenu = false) => {
+    return checkIsActive(location, url)
+      ? ` ${!hasSubmenu &&
+          "menu-item-active"} menu-item-open menu-item-not-hightlighted`
+      : "";
+  };
+
   return (
     <div id="ezs_aside" className="aside aside-left">
       <Brand />
@@ -89,7 +98,10 @@ function Aside(props) {
             CateList.map((item, index) => (
               <li
                 className={`menu-item ${item.children.length > 0 &&
-                  "menu-item-submenu"}`}
+                  "menu-item-submenu"} ${getMenuItemActive(
+                  `/${index + 1}/${item.NameFr}/${item.ID}`,
+                  false
+                )}`}
                 aria-haspopup="true"
                 data-menu-toggle={item.children.length > 0 && "hover"}
                 key={index}
@@ -97,7 +109,7 @@ function Aside(props) {
                 <NavLink
                   className={`menu-link ${item.children.length > 0 &&
                     "menu-toggle"}`}
-                  to="/"
+                  to={`/${index + 1}/${item.NameFr}/${item.ID}`}
                 >
                   <span className="svg-icon menu-icon">
                     <i className={item.KeySEO}></i>
