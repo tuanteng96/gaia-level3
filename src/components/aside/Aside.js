@@ -33,11 +33,11 @@ const convertTree = (list) => {
       children:
         item.children && item.children.length > 0
           ? item.children.map((sub) => {
-              return {
-                ...sub,
-                id: sub.ID,
-              };
-            })
+            return {
+              ...sub,
+              id: sub.ID,
+            };
+          })
           : [],
     };
   });
@@ -51,7 +51,7 @@ function Aside(props) {
     HomeCrud.getCate(1)
       .then(({ data }) => {
         const result = convertTree(data);
-        setCateList(result ? result[0].children : []);
+        setCateList(result ? result[0].children.filter(item => item.IsPublic > 0) : []);
       })
       .catch((error) => {
         console.log(error);
@@ -80,9 +80,13 @@ function Aside(props) {
   const getMenuItemActive = (url, hasSubmenu = false) => {
     return checkIsActive(location, url)
       ? ` ${!hasSubmenu &&
-          "menu-item-active"} menu-item-open menu-item-not-hightlighted`
+      "menu-item-active"} menu-item-open menu-item-not-hightlighted`
       : "";
   };
+
+  const isSubmenu = (item, index) => {
+    return item.children.length > 0 && index > 10;
+  }
 
   return (
     <div id="ezs_aside" className="aside aside-left">
@@ -93,21 +97,21 @@ function Aside(props) {
         data-menu-vertical="1"
         data-menu-scroll="1"
       >
-        <ul className="menu-nav py-3 px-4">
+        <ul className="menu-nav py-4 px-4">
           {CateList &&
             CateList.map((item, index) => (
               <li
-                className={`menu-item ${item.children.length > 0 &&
+                className={`menu-item ${isSubmenu(item, index) &&
                   "menu-item-submenu"} ${getMenuItemActive(
-                  `/${index + 1}/${item.NameFr}/${item.ID}`,
-                  false
-                )}`}
+                    `/${index + 1}/${item.NameFr}/${item.ID}`,
+                    false
+                  )}`}
                 aria-haspopup="true"
-                data-menu-toggle={item.children.length > 0 && "hover"}
+                data-menu-toggle={isSubmenu(item, index) && "hover"}
                 key={index}
               >
                 <NavLink
-                  className={`menu-link ${item.children.length > 0 &&
+                  className={`menu-link ${isSubmenu(item, index) &&
                     "menu-toggle"}`}
                   to={`/${index + 1}/${item.NameFr}/${item.ID}`}
                 >
@@ -119,7 +123,7 @@ function Aside(props) {
                     {item.Title}
                   </span>
                 </NavLink>
-                {item.children.length > 0 && (
+                {isSubmenu(item, index) && (
                   <div className="menu-submenu ">
                     <i className="menu-arrow" />
                     <ul className="menu-subnav">

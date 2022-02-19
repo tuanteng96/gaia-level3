@@ -14,6 +14,9 @@
         }
         &__title {
             margin-bottom: 35px;
+            img {
+                max-width: 600px;
+            }
         }
         &__content {
             padding: 0 8%;
@@ -126,3 +129,22 @@
 }
 
 @include home-base();
+
+@include media-breakpoint-down(lg) {
+    .page-home {
+        padding: 100px 0 40px 0;
+        .home-box {
+            margin-bottom: 90px;
+        }
+    }
+}
+@include media-breakpoint-down(sm) {
+    .page-home {
+        height: auto;
+        &__title {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

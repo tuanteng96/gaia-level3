@@ -11,9 +11,9 @@
 // 3: Components
 @import "./components/utilities",
 "./components/button",
-"./components/modal";
+"./components/modal", "./components/loader";
 // 4: Plugins
-@import "./vendors/plugins/perfect-scrollbar";
+@import "./vendors/plugins/perfect-scrollbar", "./vendors/plugins/toastify";
 // 5: Layout
 @import "./layout/init",
 "./layout/aside",

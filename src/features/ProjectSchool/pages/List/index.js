@@ -1,25 +1,30 @@
-import { Modal } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { toAbsoluteUrl, toAbsoluteUrlSv } from "../../helpers/AssetsHelpers";
-import HomeCrud from "../Home/_redux/HomeCrud";
-import {Helmet} from "react-helmet";
+import { Link, useParams } from "react-router-dom";
+import { toAbsoluteUrl, toAbsoluteUrlSv } from "../../../../helpers/AssetsHelpers";
+import HomeCrud from "../../../Home/_redux/HomeCrud";
+import { Modal } from "react-bootstrap";
+import { Helmet } from "react-helmet";
 
-function ProjectVideos(props) {
+function ProjectSchoolList() {
   const [loading, setLoading] = useState(false);
   const [CateCurrent, setCateCurrent] = useState({});
+  const [CateCurrentList, setCateCurrentList] = useState({});
   const [List, setList] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [itemModal, setItemModal] = useState(null);
-  let { Id } = useParams();
-  let { pathname } = useLocation();
+
+  let { CateId, Id } = useParams();
 
   const getList = async () => {
     setLoading(true);
     try {
       const { data: CurrentCate } = await HomeCrud.getCate(Id);
-      const { data: CurrentList } = await HomeCrud.getList(Id);
+      const { data: CurrentCateList } = await HomeCrud.getCate(CateId);
+      const { data: CurrentList } = await HomeCrud.getList(CateId);
+
       setCateCurrent(CurrentCate[0]);
+      setCateCurrentList(CurrentCateList[0]);
+
       setList(CurrentList);
       setLoading(false);
     } catch (error) {
@@ -60,13 +65,18 @@ function ProjectVideos(props) {
         !loading && (
           <React.Fragment>
             <Helmet>
-              <title>{CateCurrent?.Title}</title>
+              <title>
+                {CateCurrentList?.Title}
+              </title>
             </Helmet>
             <div className="container container-resize">
               <div className="braum">
                 <ul>
                   <li>
-                    <Link to={pathname}>I. {CateCurrent?.Title}</Link>
+                    <Link to="/">III. {CateCurrent?.Title}</Link>
+                  </li>
+                  <li>
+                    <span>{CateCurrentList?.Title}</span>
                   </li>
                 </ul>
               </div>
@@ -74,32 +84,31 @@ function ProjectVideos(props) {
             <div className="content-scroll">
               <div className="container container-resize container-15">
                 <div className="row">
-                  {List &&
-                    List.length > 0 ? List.map((item, index) => (
-                      <div className="col-md-6 col-lg-4 col-xl-4 col-xxxl-3 col-15" key={index}>
-                        <div
-                          className="item-field item-field-play"
-                          onClick={() => OpenModal(item)}
-                        >
-                          <div className="images">
+                  {List && List.length > 0 ? List.map((item, index) => (
+                    <div className="col-md-6 col-lg-4 col-xl-4 col-xxxl-3 col-15" key={index}>
+                      <div
+                        className="item-field item-field-play"
+                        onClick={() => OpenModal(item)}
+                      >
+                        <div className="images">
+                          <img
+                            className="w-100"
+                            src={toAbsoluteUrlSv(item.FileName)}
+                            alt={item.Title}
+                          />
+                          <div className="icon-play">
                             <img
-                              className="w-100"
-                              src={toAbsoluteUrlSv(item.FileName)}
-                              alt={item.Title}
+                              src={toAbsoluteUrl("/media/home/icon-play.png")}
+                              alt="Play"
                             />
-                            <div className="icon-play">
-                              <img
-                                src={toAbsoluteUrl("/media/home/icon-play.png")}
-                                alt="Play"
-                              />
-                            </div>
                           </div>
-                          <h3>
-                            {index + 1}. {item.Title}
-                          </h3>
                         </div>
+                        <h3>
+                          {index + 1}. {item.Title}
+                        </h3>
                       </div>
-                    )) : (
+                    </div>
+                  )) : (
                     <div className="col-md-12">
                       <div className="box-notfound">Không có bài</div>
                     </div>
@@ -110,6 +119,7 @@ function ProjectVideos(props) {
           </React.Fragment>
         )
       }
+
       <Modal
         show={isModal}
         fullscreen={true}
@@ -172,4 +182,4 @@ function ProjectVideos(props) {
   );
 }
 
-export default ProjectVideos;
+export default ProjectSchoolList;

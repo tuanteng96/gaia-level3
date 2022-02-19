@@ -44,3 +44,20 @@
         }
     }
 }
+
+@include media-breakpoint-down(sm) { 
+    .braum {
+        ul {
+            flex-direction: column;
+            li {
+                margin-right: 0;
+                &:before {
+                    display: none;
+                }
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

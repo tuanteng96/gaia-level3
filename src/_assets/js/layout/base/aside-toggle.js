@@ -16,7 +16,10 @@ var EZSLayoutAsideToggle = function() {
 
     // Initialize
     var _init = function() {
-
+        if(EZSUtil.isBreakpointDown('lg') === true) {
+            EZSUtil.addClass(_body, 'aside-minimize');
+        }
+        
         _toggleObject = new EZSToggle(_element, _body, {
             targetState: 'aside-minimize',
             toggleState: 'active'

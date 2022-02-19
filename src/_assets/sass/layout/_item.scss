@@ -26,6 +26,9 @@
         position: relative;
         .images {
             position: relative;
+            &.expires {
+                // Hết hạn
+            }
             .btn-view {
                 position: absolute;
                 bottom: 0;
@@ -97,6 +100,23 @@
                 cursor: pointer;
                 img {
                     width: 45px;
+                }
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .item-field-btns {
+        .images {
+            .btn-view {
+                flex-direction: column;
+                .btn-viewed {
+                    width: 100%;
+                    margin: 0 0 8px 0;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
                 }
             }
         }

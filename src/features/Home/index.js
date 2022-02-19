@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../Auth/_redux/AuthSlice";
 
 function Home(props) {
-  const [isOpenUser, setIsOpenUser] = useState(true);
+  const [isOpenUser, setIsOpenUser] = useState(false);
   const wrapperRef = useRef(null);
   const [CateList, setCateList] = useState([]);
   const dispath = useDispatch();
@@ -21,7 +21,7 @@ function Home(props) {
   const getCateCurrent = () => {
     HomeCrud.getCate(1)
       .then(({ data }) => {
-        setCateList(data.filter((item) => item.ParentID === 1));
+        setCateList(data.filter((item) => item.ParentID === 1 && item.IsPublic > 0));
       })
       .catch((error) => {
         console.log(error);
@@ -48,7 +48,7 @@ function Home(props) {
           <div className="row">
             {CateList &&
               CateList.map((item, index) => (
-                <div className="col-md-3" key={index}>
+                <div className="col-md-6 col-lg-4 mt-8 mt-lg-0" key={index}>
                   <Animated
                     animationIn="flipInY"
                     animationOut="fadeOut"
