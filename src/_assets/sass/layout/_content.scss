@@ -31,17 +31,23 @@
             border-radius: 10px;
             background-color: #5bbcff;
         }
+        &.fix-padding {
+            padding-right: 200px;
+        }
     }
 }
 
 .aside-minimize {
     .content {
         .container-resize {
-            max-width: 1320px;
+            max-width: 1475px;
         }
     }
     .content-scroll {
         padding-right: 0;
+        &.fix-padding {
+            padding-right: 0;
+        }
     }
 }
 

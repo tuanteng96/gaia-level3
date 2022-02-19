@@ -13,13 +13,13 @@
             left: 10px;
         }
         &__title {
-            margin-bottom: 35px;
+            margin-bottom: 50px;
             img {
                 max-width: 600px;
             }
         }
         &__content {
-            padding: 0 8%;
+            //padding: 0 8%;
         }
         &__user {
             padding: 0 25px;
@@ -94,7 +94,7 @@
                 position: absolute;
                 bottom: -50px;
                 background: linear-gradient( 0deg, #375cb3, #283b83 80%) no-repeat;
-                padding: 16px 15px 15px;
+                padding: 16px 30px 15px;
                 border: 2px solid $white;
                 border-radius: 50px;
                 width: 80%;
@@ -129,6 +129,27 @@
 }
 
 @include home-base();
+@include media-breakpoint-down(xxl) {
+    .page-home {
+        padding: 100px 0 40px 0;
+        .home-box {
+            .title {
+                padding: 16px 15px 15px;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(xl) {
+    .page-home {
+        padding: 100px 0 40px 0;
+        .home-box {
+            .title {
+                width: 90%;
+            }
+        }
+    }
+}
 
 @include media-breakpoint-down(lg) {
     .page-home {
@@ -138,6 +159,7 @@
         }
     }
 }
+
 @include media-breakpoint-down(sm) {
     .page-home {
         height: auto;

@@ -44,7 +44,7 @@ function Home(props) {
         <div className="text-center page-home__title">
           <img src={toAbsoluteUrl("/media/home/title.png")} alt="" />
         </div>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             {CateList &&
               CateList.map((item, index) => (
@@ -65,9 +65,12 @@ function Home(props) {
                             <img src={toAbsoluteUrlSv(item.Thumbnail)} alt="" />
                           </div>
                           <div className="title d-flex flex-column align-items-center">
-                            <span className="text-uppercase line-height-lg text-center">
-                              {item.Title}
-                            </span>
+                            <span
+                              className="text-uppercase line-height-lg text-center"
+                              dangerouslySetInnerHTML={{
+                                __html: item.TitleSEO.replace(",", "<br />"),
+                              }}
+                            />
                           </div>
                         </div>
                       </Link>

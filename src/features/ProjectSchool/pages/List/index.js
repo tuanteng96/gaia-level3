@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { toAbsoluteUrl, toAbsoluteUrlSv } from "../../../../helpers/AssetsHelpers";
 import HomeCrud from "../../../Home/_redux/HomeCrud";
 import { Modal } from "react-bootstrap";
@@ -54,38 +54,46 @@ function ProjectSchoolList() {
     return "CDN";
   };
 
+  const { pathname } = useLocation();
   return (
     <>
-      {
-        loading && <div className="h-100 w-100 d-flex align-items-center justify-content-center">
+      {loading && (
+        <div className="h-100 w-100 d-flex align-items-center justify-content-center">
           <div className="loader"></div>
         </div>
-      }
-      {
-        !loading && (
-          <React.Fragment>
-            <Helmet>
-              <title>
-                {CateCurrentList?.Title}
-              </title>
-            </Helmet>
-            <div className="container container-resize">
-              <div className="braum">
-                <ul>
-                  <li>
-                    <Link to="/">III. {CateCurrent?.Title}</Link>
-                  </li>
-                  <li>
-                    <span>{CateCurrentList?.Title}</span>
-                  </li>
-                </ul>
-              </div>
+      )}
+      {!loading && (
+        <React.Fragment>
+          <Helmet>
+            <title>{CateCurrentList?.Title}</title>
+          </Helmet>
+          <div className="container container-resize">
+            <div className="braum">
+              <ul>
+                <li>
+                  <Link
+                    to={`/${pathname.split("/")[1]}/${CateCurrent?.NameFr}/${
+                      CateCurrent?.ID
+                    }`}
+                  >
+                    II. {CateCurrent?.Title}
+                  </Link>
+                </li>
+                <li>
+                  <span>{CateCurrentList?.Title}</span>
+                </li>
+              </ul>
             </div>
-            <div className="content-scroll">
-              <div className="container container-resize container-15">
-                <div className="row">
-                  {List && List.length > 0 ? List.map((item, index) => (
-                    <div className="col-md-6 col-lg-4 col-xl-4 col-xxxl-3 col-15" key={index}>
+          </div>
+          <div className="content-scroll">
+            <div className="container container-resize container-15">
+              <div className="row">
+                {List && List.length > 0 ? (
+                  List.map((item, index) => (
+                    <div
+                      className="col-md-6 col-lg-4 col-xl-4 col-xxxl-3 col-15"
+                      key={index}
+                    >
                       <div
                         className="item-field item-field-play"
                         onClick={() => OpenModal(item)}
@@ -108,17 +116,17 @@ function ProjectSchoolList() {
                         </h3>
                       </div>
                     </div>
-                  )) : (
-                    <div className="col-md-12">
-                      <div className="box-notfound">Không có bài</div>
-                    </div>
-                  )}
-                </div>
+                  ))
+                ) : (
+                  <div className="col-md-12">
+                    <div className="box-notfound">Không có bài</div>
+                  </div>
+                )}
               </div>
             </div>
-          </React.Fragment>
-        )
-      }
+          </div>
+        </React.Fragment>
+      )}
 
       <Modal
         show={isModal}
